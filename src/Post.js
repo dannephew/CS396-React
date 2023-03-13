@@ -1,6 +1,8 @@
 import React from 'react';
 import {getHeaders} from './utils';
 import LikeButton from './LikeButton';
+import BookmarkButton from './BookmarkButton';
+import AddComment from './AddComment';
 
 
 class Post extends React.Component {  
@@ -47,6 +49,7 @@ class Post extends React.Component {
         //post = an actual post
         //this.state.post is defined in the constructor
         const post = this.state.post;
+        const len = this.state.post.comments.length;
         //console.log("this.state.post: ", this.state.post)
         //console.log("this.state.model: ", this.state.model)
         if (!post) {
@@ -69,18 +72,46 @@ class Post extends React.Component {
                 
                 <div className="info">
                     <div>
-                        Additional data / controls go here...
                         <LikeButton 
                             likeId={post.current_user_like_id}
                             postId={post.id}
                             requeryPost={this.requeryPost}
-                            // notify post to requery
-                            // you can't see this data in the actual HTML
-                            //these three data are part of this.props somehow
+                        />
+                        <BookmarkButton 
+                            bookmarkId={post.current_user_bookmark_id}
+                            postId={post.id}
+                            requeryPost={this.requeryPost}
                         />
 
                     </div>
                     <p>{ post.caption }</p>
+                    <p>({ post.display_time })</p>
+                    {len > 1 ? (
+                        <p> VIEW ALL {post.comments.length} COMMENTS</p>
+                    ) : (
+                        console.log("lol")
+                    )}
+                    
+                    {len > 0 ? (
+                        <p>{post.comments[post.comments.length - 1].text}</p>
+                    ) : (
+                        console.log("lol")
+                    )}
+
+                    {len > 0 ? (
+                        <p>({post.comments[post.comments.length - 1].display_time})</p>
+                    ) : (
+                        console.log("lol")
+                    )}
+
+                    <div id='comment'>
+                        <AddComment 
+                                bookmarkId={post.current_user_bookmark_id}
+                                postId={post.id}
+                                requeryPost={this.requeryPost}
+                        />
+
+                    </div>
                 </div>
             </section> 
         );     

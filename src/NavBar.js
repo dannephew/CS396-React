@@ -13,6 +13,14 @@ class NavBar extends React.Component {
         console.log('NavBar component mounted');
     }
 
+    // getName() {
+    //     console.log("BALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLSBALLS")
+    //     fetch('/api/profile')
+    //     .then((response) => response.json())
+    //     .then((data) => console.log(data));
+
+    // }
+
     render () {
         //must pass title and username property
         return (
