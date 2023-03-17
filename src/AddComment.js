@@ -1,5 +1,6 @@
 import React from 'react';
 import {getHeaders} from './utils';
+import './AddComment.css';
 
 class AddComment extends React.Component {  
 
@@ -37,7 +38,7 @@ class AddComment extends React.Component {
     render () {
         const likeId = this.props.likeId
         return (
-            <form>
+            <form className="add-comment">
                 <input type="text" placeholder="Add a comment..." onChange={this.updateText} >
                 </input>
                 <button onClick={(e) => {this.post(e)}}>

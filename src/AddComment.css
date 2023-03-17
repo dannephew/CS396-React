@@ -1,0 +1,8 @@
+.add-comment {
+    display: grid;
+    grid-template-columns: auto 100px;
+}
+
+.add-comment input {
+    width: 100%;
+}

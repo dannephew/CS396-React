@@ -11,7 +11,7 @@ class Posts extends React.Component {
             posts: []
         }
         // constructor logic
-        console.log('Posts component created, this is: ', this.state);
+        //('Posts component created, this is: ', this.state);
         this.getPosts()
     }
 
@@ -22,7 +22,7 @@ class Posts extends React.Component {
         })
         .then(response => response.json())
         .then(data => {
-            console.log("fetched, in promise, here's data: ", data)
+            //console.log("fetched, in promise, here's data: ", data)
             
             //set state to trigger redraw
             this.setState({
@@ -33,12 +33,12 @@ class Posts extends React.Component {
     //fired when component is injected into DOM
     componentDidMount() {
         // fetch posts
-        console.log('Posts component mounted');
+        //console.log('Posts component mounted');
     }
     
     //renders HTML
     render () {
-        console.log('Posts rendering', this.state)
+        //console.log('Posts rendering', this.state)
         //iterate through each post, for each post, convert JSON to react component
         return (
             <div id="posts">

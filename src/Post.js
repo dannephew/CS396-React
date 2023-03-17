@@ -14,7 +14,7 @@ class Post extends React.Component {
             //therefore, you should bind "this" when the constructor fires, so it permanently refers to instance of the class
         super(props);
         this.requeryPost = this.requeryPost.bind(this)
-        console.log("in post.js constructor, this.props.model (JSON rep of post): ", this.props.model)
+        //console.log("in post.js constructor, this.props.model (JSON rep of post): ", this.props.model)
 
         this.state = {
             post: this.props.model,
@@ -24,13 +24,13 @@ class Post extends React.Component {
     
     requeryPost() {
         //get a post with an updated data structure
-        console.log("requeryPost()")
+        //console.log("requeryPost()")
         fetch('/api/posts/' + this.props.model.id, {
             headers: getHeaders()
         })
         .then(response => response.json())
         .then(data => {
-            console.log("Updated post: ", data)
+            //console.log("Updated post: ", data)
             //after retrieving data, need to redraw the component
             this.setState({
                 //must set post to data because post is the variable inside this.state that we update
@@ -84,25 +84,18 @@ class Post extends React.Component {
                         />
 
                     </div>
-                    <p>{ post.caption }</p>
-                    <p>({ post.display_time })</p>
+                    <p><small><b>{post.user.username}</b> { post.caption }</small></p>
+                    <p><small><small>{ post.display_time }</small></small></p>
                     {len > 1 ? (
-                        <p> VIEW ALL {post.comments.length} COMMENTS</p>
-                    ) : (
-                        console.log("lol")
-                    )}
+                        <p> <small>view all {post.comments.length} comments</small></p>
+                    ) : ''}
                     
                     {len > 0 ? (
-                        <p>{post.comments[post.comments.length - 1].text}</p>
-                    ) : (
-                        console.log("lol")
-                    )}
-
-                    {len > 0 ? (
-                        <p>({post.comments[post.comments.length - 1].display_time})</p>
-                    ) : (
-                        console.log("lol")
-                    )}
+                        <div>
+                        <p><small><b>{post.comments[post.comments.length - 1].user.username}</b> {post.comments[post.comments.length - 1].text}</small></p>
+                        <p><small><small>{post.comments[post.comments.length - 1].display_time}</small></small></p>
+                        </div>
+                    ) : ''}
 
                     <div id='comment'>
                         <AddComment 

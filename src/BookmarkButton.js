@@ -11,6 +11,24 @@ class BookmarkButton extends React.Component {
         this.unbookmark = this.unbookmark.bind(this);
     }
 
+    requeryPost() {
+        //get a post with an updated data structure
+        //console.log("requeryPost()")
+        fetch('/api/posts/' + this.props.model.id, {
+            headers: getHeaders()
+        })
+        .then(response => response.json())
+        .then(data => {
+            //console.log("Updated post: ", data)
+            //after retrieving data, need to redraw the component
+            this.setState({
+                //must set post to data because post is the variable inside this.state that we update
+                post: data
+                //getting access to model through const post = this.state.post;
+            })
+        })
+    }
+
     toggleBookmark(ev) {
         console.log('toggleBookmark')
         if (this.props.bookmarkId) {
@@ -22,7 +40,7 @@ class BookmarkButton extends React.Component {
 
     bookmark() {
         console.log('bookmark');
-        fetch('/api/bookmarks', {
+        fetch('/api/bookmarks/', {
             headers: getHeaders(),
             method: 'POST',
             body: JSON.stringify({post_id: this.props.postId})
